@@ -87,4 +87,66 @@ class MahasiswaController extends Controller
             }
         }
     }
+
+    public function edit($id)
+    {
+        $model = $this->model('Mahasiswa');
+
+        $data['mahasiswa'] = $model->find($id);
+
+        if (!$data['mahasiswa']) {
+
+            $this->setFlash('Data tidak ditemukan', 'danger');
+
+            header('Location: ' . BASEURL . '/mahasiswa');
+            exit;
+        }
+
+        $this->view('mahasiswa/edit', $data);
+    }
+
+    public function update($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $model = $this->model('Mahasiswa');
+
+            $data = [
+                'npm' => trim($_POST['npm']),
+                'nama' => trim($_POST['nama']),
+                'fakultas' => trim($_POST['fakultas']),
+                'jurusan' => trim($_POST['jurusan']),
+                'tempat_lahir' => trim($_POST['tempat_lahir']),
+                'tanggal_lahir' => $_POST['tanggal_lahir'],
+                'jenis_kelamin' => $_POST['jenis_kelamin']
+            ];
+
+            if ($model->update($id, $data)) {
+
+                $this->setFlash('Data berhasil diupdate', 'success');
+            } else {
+
+                $this->setFlash('Gagal update data', 'danger');
+            }
+
+            header('Location: ' . BASEURL . '/mahasiswa');
+            exit;
+        }
+    }
+
+    public function delete($id)
+    {
+        $model = $this->model('Mahasiswa');
+
+        if ($model->delete($id)) {
+
+            $this->setFlash('Data berhasil dihapus', 'success');
+        } else {
+
+            $this->setFlash('Gagal menghapus data', 'danger');
+        }
+
+        header('Location: ' . BASEURL . '/mahasiswa');
+        exit;
+    }
 }
