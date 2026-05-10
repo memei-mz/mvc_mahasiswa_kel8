@@ -6,7 +6,19 @@ class MahasiswaController extends Controller
     {
         $model = $this->model('Mahasiswa');
 
-        $data['mahasiswa'] = $model->getAll();
+        $search = $_GET['search'] ?? '';
+        $jurusan = $_GET['jurusan'] ?? '';
+
+        if (!empty($search) || !empty($jurusan)) {
+
+            $data['mahasiswa'] = $model->searchAndFilter($search, $jurusan);
+        } else {
+
+            $data['mahasiswa'] = $model->getAll();
+        }
+
+        $data['search'] = $search;
+        $data['jurusan'] = $jurusan;
 
         $this->view('mahasiswa/index', $data);
     }

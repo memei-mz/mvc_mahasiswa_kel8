@@ -100,4 +100,33 @@ class Mahasiswa
             ':id' => $id
         ]);
     }
+
+    public function searchAndFilter($search = '', $jurusan = '')
+    {
+        $query = "SELECT * FROM mahasiswa WHERE 1=1";
+
+        $params = [];
+
+        if (!empty($search)) {
+
+            $query .= " AND (npm LIKE :search OR nama LIKE :search)";
+
+            $params[':search'] = "%$search%";
+        }
+
+        if (!empty($jurusan)) {
+
+            $query .= " AND jurusan = :jurusan";
+
+            $params[':jurusan'] = $jurusan;
+        }
+
+        $query .= " ORDER BY id DESC";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->execute($params);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
