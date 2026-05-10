@@ -1,13 +1,15 @@
 <?php
 
-class Router {
+class Router
+{
 
     private $controller = 'HomeController';
     private $method = 'index';
     private $params = [];
 
     // mengambil URL
-    public function parseURL() {
+    public function parseURL()
+    {
 
         if (isset($_GET['url'])) {
 
@@ -22,7 +24,8 @@ class Router {
     }
 
     // menjalankan routing
-    public function run() {
+    public function run()
+    {
 
         $url = $this->parseURL();
 
@@ -40,7 +43,6 @@ class Router {
                 $this->controller = $controllerName;
 
                 unset($url[0]);
-
             } else {
 
                 $this->error404();
@@ -63,7 +65,6 @@ class Router {
 
                 $this->method = $url[1];
                 unset($url[1]);
-
             } else {
 
                 $this->error404();
@@ -84,7 +85,8 @@ class Router {
     }
 
     // error sederhana
-    public function error404() {
+    public function error404()
+    {
 
         echo "<h1>404 - Halaman Tidak Ditemukan</h1>";
     }
