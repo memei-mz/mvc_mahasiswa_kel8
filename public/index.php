@@ -1,13 +1,13 @@
 <?php
 
-// BASE URL
-define('BASEURL', 'http://localhost/mvc_mahasiswa/public');
+session_start();
 
-// memanggil file core
+define('BASEURL', 'http://localhost/mvc_mahasiswa_kel8/public');
+
+require_once '../config/database.php';
+require_once '../core/Database.php';
 require_once '../core/Controller.php';
 require_once '../core/Router.php';
-require_once '../core/Database.php';
 
-// menjalankan router
 $router = new Router();
 $router->run();

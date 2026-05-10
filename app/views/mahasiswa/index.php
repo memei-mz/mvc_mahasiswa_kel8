@@ -13,6 +13,13 @@
 <body class="bg-light">
 
     <div class="container mt-5">
+        <?php
+        $controller = new Controller();
+        $controller->flash();
+        ?>
+        <a href="<?= BASEURL; ?>/mahasiswa/create" class="btn btn-primary mb-3">
+            Tambah Mahasiswa
+        </a>
 
         <div class="card shadow">
 

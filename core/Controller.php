@@ -16,8 +16,27 @@ class Controller
         return new $model;
     }
 
-    public function formatTanggal($tanggal)
+    public function setFlash($message, $type = 'success')
     {
-        return date('d-m-Y', strtotime($tanggal));
+        $_SESSION['flash'] = [
+            'message' => $message,
+            'type' => $type
+        ];
+    }
+
+    public function flash()
+    {
+        if (isset($_SESSION['flash'])) {
+
+            $flash = $_SESSION['flash'];
+
+            echo '
+                <div class="alert alert-' . $flash['type'] . '">
+                    ' . $flash['message'] . '
+                </div>
+            ';
+
+            unset($_SESSION['flash']);
+        }
     }
 }
