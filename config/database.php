@@ -1,25 +1,9 @@
 <?php
 
-class Database {
+class ConfigDatabase {
 
-    private $host = "localhost";
-    private $dbname = "uniska_latihan_mvc_2026";
-    private $username = "root";
-    private $password = "";
-
-    public function getConnection() {
-        try {
-            $conn = new PDO(
-                "mysql:host=$this->host;dbname=$this->dbname",
-                $this->username,
-                $this->password
-            );
-
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-
-        } catch (PDOException $e) {
-            die("Koneksi gagal: " . $e->getMessage());
-        }
-    }
+    public $host = "localhost";
+    public $dbname = "uniska_latihan_mvc_2026";
+    public $username = "root";
+    public $password = "";
 }
