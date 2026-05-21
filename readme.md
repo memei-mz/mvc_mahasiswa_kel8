@@ -94,8 +94,12 @@ Endpoint model AI:
 - Gemini 2.5 Flash
 
 Akses chatbot:
-```text id="9q4g6m"
+
+```text
 http://localhost/mvc_mahasiswa_kel8/public/chatbot
+```
+
+## Cara Menjalankan Project
 
 ## Cara Menjalankan Project
 
