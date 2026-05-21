@@ -19,6 +19,7 @@ class MahasiswaController extends Controller
 
         $data['search'] = $search;
         $data['jurusan'] = $jurusan;
+        $data['title'] = 'Data Mahasiswa';
 
         $this->view('mahasiswa/index', $data);
     }

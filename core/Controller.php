@@ -6,7 +6,17 @@ class Controller
     {
         extract($data);
 
+        ob_start();
+
         require_once '../app/views/' . $view . '.php';
+
+        $content = ob_get_clean();
+
+        require_once '../app/views/layouts/header.php';
+
+        echo $content;
+
+        require_once '../app/views/layouts/footer.php';
     }
 
     public function model($model)

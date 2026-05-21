@@ -1,50 +1,3 @@
-<!DOCTYPE html>
-<html lang="id">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Mahasiswa</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background-color: #f5f7fb;
-        }
-
-        .card {
-            border: none;
-            border-radius: 15px;
-        }
-
-        .table th {
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-
-        .table td {
-            vertical-align: middle;
-        }
-
-        .table-responsive {
-            border-radius: 10px;
-        }
-
-        .btn {
-            border-radius: 8px;
-        }
-
-        .search-card {
-            background-color: #ffffff;
-            border-radius: 15px;
-        }
-    </style>
-</head>
-
-<body>
-
     <div class="container py-5">
 
         <!-- Flash Message -->
@@ -283,7 +236,3 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
