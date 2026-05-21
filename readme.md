@@ -30,7 +30,9 @@ Project ini menggunakan konsep MVC (Model View Controller):
 - Flash Message
 - Layout Bootstrap 5 Responsive
 - Routing MVC Sederhana
-
+- Sistem Login Multi Role (Admin & User)
+- Session Authentication
+- Chatbot AI Gemini
 ---
 
 ## Teknologi yang Digunakan
@@ -43,6 +45,57 @@ Project ini menggunakan konsep MVC (Model View Controller):
 - XAMPP
 
 ---
+
+---
+
+## Sistem Login & Hak Akses
+
+Aplikasi memiliki sistem autentikasi menggunakan session PHP dengan dua role:
+
+### Admin
+Admin memiliki akses penuh:
+- Melihat data mahasiswa
+- Menambah data mahasiswa
+- Mengedit data mahasiswa
+- Menghapus data mahasiswa
+- Export CSV & PDF
+- Mengakses Chatbot AI
+
+### User
+User hanya dapat:
+- Melihat data mahasiswa
+- Melakukan pencarian & filter
+- Export CSV & PDF
+- Mengakses Chatbot AI
+
+Sistem login menggunakan:
+- Session PHP
+- Password Hashing (`password_hash`)
+- Validasi Login (`password_verify`)
+
+---
+
+## Fitur Chatbot AI Gemini
+
+Project ini juga dilengkapi fitur Chatbot AI menggunakan Google Gemini API.
+
+Fitur chatbot:
+- Tanya jawab seputar perkuliahan
+- Penjelasan materi pemrograman
+- Bantuan konsep MVC dan CRUD
+- AI Assistant sederhana berbasis web
+
+Teknologi yang digunakan:
+- Google Gemini API
+- Fetch API JavaScript
+- Bootstrap Chat Interface
+
+Endpoint model AI:
+- Gemini 2.5 Flash
+
+Akses chatbot:
+```text id="9q4g6m"
+http://localhost/mvc_mahasiswa_kel8/public/chatbot
 
 ## Cara Menjalankan Project
 
@@ -94,6 +147,11 @@ Project ini menggunakan konsep MVC (Model View Controller):
 ![Sesi 8](screenshots/sesi%208/Screenshot%202026-05-21%20115449.png)
 ![Sesi 8](screenshots/sesi%208/Screenshot%202026-05-21%20115526.png)
 ![Sesi 8    ](screenshots/sesi%208/Screenshot%202026-05-21%20120255.png)
+
+### Tugas Akhir
+![Tugas Akhir](screenshots/Tugas%20Akhir/Screenshot%202026-05-21%20124234.png)
+![Tugas Akhir](screenshots/Tugas%20Akhir/Screenshot%202026-05-21%20124248.png)
+![Tugas Akhir](screenshots/Tugas%20Akhir/Screenshot%202026-05-21%20124437.png)
 ---
 
 ## Repository GitHub

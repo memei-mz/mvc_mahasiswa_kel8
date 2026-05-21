@@ -16,10 +16,16 @@
                 </p>
             </div>
 
-            <a href="<?= BASEURL; ?>/mahasiswa/create"
-                class="btn btn-primary px-4">
-                + Tambah Mahasiswa
-            </a>
+            <?php if ($_SESSION['user']['role'] == 'admin') : ?>
+
+                <a href="<?= BASEURL; ?>/mahasiswa/create"
+                    class="btn btn-primary px-4">
+
+                    + Tambah Mahasiswa
+
+                </a>
+
+            <?php endif; ?>
 
         </div>
 
@@ -197,24 +203,42 @@
 
                                         </td>
 
-                                        <td>
+                                        <?php if ($_SESSION['user']['role'] == 'admin') : ?>
 
-                                            <div class="d-flex justify-content-center gap-2">
+                                            <td>
 
-                                                <a href="<?= BASEURL; ?>/mahasiswa/edit/<?= $mhs['id']; ?>"
-                                                    class="btn btn-warning btn-sm">
-                                                    Edit
-                                                </a>
+                                                <div class="d-flex justify-content-center gap-2">
 
-                                                <a href="<?= BASEURL; ?>/mahasiswa/delete/<?= $mhs['id']; ?>"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    Hapus
-                                                </a>
+                                                    <a href="<?= BASEURL; ?>/mahasiswa/edit/<?= $mhs['id']; ?>"
+                                                        class="btn btn-warning btn-sm">
 
-                                            </div>
+                                                        Edit
 
-                                        </td>
+                                                    </a>
+
+                                                    <a href="<?= BASEURL; ?>/mahasiswa/delete/<?= $mhs['id']; ?>"
+                                                        class="btn btn-danger btn-sm"
+                                                        onclick="return confirm('Yakin ingin menghapus data ini?')">
+
+                                                        Hapus
+
+                                                    </a>
+
+                                                </div>
+
+                                            </td>
+
+                                        <?php else : ?>
+
+                                            <td>
+
+                                                <span class="badge bg-secondary">
+                                                    User Only View
+                                                </span>
+
+                                            </td>
+
+                                        <?php endif; ?>
 
                                     </tr>
 

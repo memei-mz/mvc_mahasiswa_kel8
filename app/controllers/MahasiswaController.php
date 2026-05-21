@@ -29,10 +29,12 @@ class MahasiswaController extends Controller
     public function create()
     {
         $this->view('mahasiswa/create');
+        $this->checkAdmin();
     }
 
     public function store()
     {
+        $this->checkAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $model = $this->model('Mahasiswa');
@@ -105,6 +107,7 @@ class MahasiswaController extends Controller
 
     public function edit($id)
     {
+        $this->checkAdmin();
         $model = $this->model('Mahasiswa');
 
         $data['mahasiswa'] = $model->find($id);
@@ -122,6 +125,7 @@ class MahasiswaController extends Controller
 
     public function update($id)
     {
+        $this->checkAdmin();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $model = $this->model('Mahasiswa');
@@ -151,6 +155,7 @@ class MahasiswaController extends Controller
 
     public function delete($id)
     {
+        $this->checkAdmin();
         $model = $this->model('Mahasiswa');
 
         if ($model->delete($id)) {
@@ -293,5 +298,28 @@ class MahasiswaController extends Controller
             'data_mahasiswa.pdf',
             ['Attachment' => true]
         );
+    }
+
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+
+            header('Location: ' . BASEURL . '/auth/login');
+
+            exit;
+        }
+    }
+
+    private function checkAdmin()
+    {
+        if ($_SESSION['user']['role'] != 'admin') {
+
+            $_SESSION['error'] =
+                'Akses ditolak';
+
+            header('Location: ' . BASEURL . '/mahasiswa');
+
+            exit;
+        }
     }
 }

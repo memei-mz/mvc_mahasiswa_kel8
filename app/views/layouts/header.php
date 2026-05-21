@@ -71,11 +71,45 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link <?= (strpos($_SERVER['REQUEST_URI'], '/mahasiswa/create') !== false) ? 'active' : ''; ?>"
-                            href="<?= BASEURL; ?>/mahasiswa/create">
-                            Tambah Mahasiswa
+
+                        <a class="nav-link"
+                            href="<?= BASEURL; ?>/chatbot">
+
+                            Chatbot AI
+
                         </a>
+
                     </li>
+
+                    <?php if (isset($_SESSION['user'])) : ?>
+
+                        <li class="nav-item">
+
+                            <span class="nav-link text-warning fw-bold">
+
+                                Login sebagai:
+                                <?= ucfirst($_SESSION['user']['role']); ?>
+
+                            </span>
+
+                        </li>
+
+                    <?php endif; ?>
+
+                    <?php if (isset($_SESSION['user'])) : ?>
+
+                        <li class="nav-item">
+
+                            <a class="nav-link"
+                                href="<?= BASEURL; ?>/auth/logout">
+
+                                Logout
+
+                            </a>
+
+                        </li>
+
+                    <?php endif; ?>
 
                 </ul>
 
