@@ -85,6 +85,16 @@
                                 Reset
                             </a>
 
+                            <a href="<?= BASEURL; ?>/mahasiswa/exportCSV?search=<?= $search ?? ''; ?>&jurusan=<?= $jurusan ?? ''; ?>"
+                                class="btn btn-success w-100">
+                                Export CSV
+                            </a>
+
+                            <a href="<?= BASEURL; ?>/mahasiswa/exportPDF?search=<?= $search ?? ''; ?>&jurusan=<?= $jurusan ?? ''; ?>"
+                                class="btn btn-danger w-100">
+                                Export PDF
+                            </a>
+
                         </div>
 
                     </div>

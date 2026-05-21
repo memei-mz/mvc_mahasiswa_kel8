@@ -1,5 +1,7 @@
 <?php
 
+use Dompdf\Dompdf;
+
 class MahasiswaController extends Controller
 {
     public function index()
@@ -161,5 +163,135 @@ class MahasiswaController extends Controller
 
         header('Location: ' . BASEURL . '/mahasiswa');
         exit;
+    }
+
+    public function exportCSV()
+    {
+        $model = $this->model('Mahasiswa');
+
+        $search = $_GET['search'] ?? '';
+        $jurusan = $_GET['jurusan'] ?? '';
+
+        if (!empty($search) || !empty($jurusan)) {
+
+            $mahasiswa = $model->searchAndFilter($search, $jurusan);
+        } else {
+
+            $mahasiswa = $model->getAll();
+        }
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="data_mahasiswa.csv"');
+
+        $output = fopen('php://output', 'w');
+
+        // Header kolom
+        fputcsv($output, [
+            'No',
+            'NPM',
+            'Nama Lengkap',
+            'Fakultas',
+            'Jurusan',
+            'Tempat Lahir',
+            'Tanggal Lahir',
+            'Jenis Kelamin',
+            'Status'
+        ]);
+
+        // LOOP TARUH DI SINI
+        $no = 1;
+
+        foreach ($mahasiswa as $mhs) {
+
+            fputcsv($output, [
+                $no++,
+                $mhs['npm'],
+                $mhs['nama'],
+                $mhs['fakultas'],
+                $mhs['jurusan'],
+                $mhs['tempat_lahir'],
+                date('d-m-Y', strtotime($mhs['tanggal_lahir'])),
+                $mhs['jenis_kelamin'],
+                ($mhs['status_id'] == 1) ? 'Aktif' : 'Nonaktif'
+            ]);
+        }
+
+        fclose($output);
+
+        exit;
+    }
+
+    public function exportPDF()
+    {
+        $model = $this->model('Mahasiswa');
+
+        $search = $_GET['search'] ?? '';
+        $jurusan = $_GET['jurusan'] ?? '';
+
+        if (!empty($search) || !empty($jurusan)) {
+
+            $mahasiswa = $model->searchAndFilter($search, $jurusan);
+        } else {
+
+            $mahasiswa = $model->getAll();
+        }
+
+        $html = '
+    <h2 style="text-align:center;">
+        Data Mahasiswa
+    </h2>
+
+    <table border="1" width="100%" cellpadding="5" cellspacing="0">
+
+        <tr style="background:#f2f2f2;">
+            <th>No</th>
+            <th>NPM</th>
+            <th>Nama</th>
+            <th>Fakultas</th>
+            <th>Jurusan</th>
+            <th>Tempat Lahir</th>
+            <th>Tanggal Lahir</th>
+            <th>Jenis Kelamin</th>
+            <th>Status</th>
+        </tr>
+    ';
+
+        $no = 1;
+
+        foreach ($mahasiswa as $mhs) {
+
+            $status = ($mhs['status_id'] == 1)
+                ? 'Aktif'
+                : 'Nonaktif';
+
+            $html .= '
+        <tr>
+            <td>' . $no++ . '</td>
+            <td>' . $mhs['npm'] . '</td>
+            <td>' . $mhs['nama'] . '</td>
+            <td>' . $mhs['fakultas'] . '</td>
+            <td>' . $mhs['jurusan'] . '</td>
+            <td>' . $mhs['tempat_lahir'] . '</td>
+            <td>' . $mhs['tanggal_lahir'] . '</td>
+            <td>' . $mhs['jenis_kelamin'] . '</td>
+            <td>' . $status . '</td>
+        </tr>
+        ';
+        }
+
+        $html .= '</table>';
+
+        $dompdf = new Dompdf();
+
+        $dompdf->loadHtml($html);
+
+        $dompdf->setPaper('A4', 'landscape');
+
+        $dompdf->render();
+
+        $dompdf->stream(
+            'data_mahasiswa.pdf',
+            ['Attachment' => true]
+        );
     }
 }
